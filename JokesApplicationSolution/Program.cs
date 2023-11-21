@@ -9,20 +9,16 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment()) //A Swagger éles környezetben nem indul
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseHttpsRedirection();   //Ha http-vel nyitják az oldalt, átirányít https-re
 
-app.UseAuthorization();
-
-app.UseDefaultFiles();
-app.UseStaticFiles();
-
-app.MapControllers();
+app.UseDefaultFiles();       //Ha nincs semmi a domain tuán, akkor az index.html-t tölti
+app.MapControllers();        //Az API Controllereket elérhetõvé teszi
+app.UseStaticFiles();        //A wwwroot mappa tartalmát elérhetõvé teszi
 
 app.Run();
